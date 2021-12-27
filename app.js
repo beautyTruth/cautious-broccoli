@@ -76,3 +76,9 @@
 /*
 my code below
 */
+
+// there are key value pairs for each; use the second one to follow along with the tutorial
+
+// http://api.currencylayer.com/live?access_key=3acf4e285e342b35ab7232008c2279b5&format=1
+
+// http://api.exchangeratesapi.io/v1/latest?access_key=f15c9143c500b323f7fbd5c9ea641411&format=1
