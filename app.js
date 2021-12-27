@@ -83,6 +83,7 @@ my code below
 
 // http://api.exchangeratesapi.io/v1/latest?access_key=f15c9143c500b323f7fbd5c9ea641411&format=1
 
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 async function getExchangeRate(fromCurrency, toCurrency) {
   const response = await fetch(
     "http://api.exchangeratesapi.io/v1/latest?access_key=f15c9143c500b323f7fbd5c9ea641411&format=1"
@@ -101,4 +102,17 @@ async function getExchangeRate(fromCurrency, toCurrency) {
   return exchangeRate;
 }
 
-getExchangeRate("AFa", "USD").then((result) => console.log(result));
+// getExchangeRate("AFA", "USD").then((result) => console.log(result));
+
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+async function convertCurrency(fromCurrency, toCurrency, exchangeAmount) {
+  const amountExchangeRate = await getExchangeRate(fromCurrency, toCurrency);
+  const convertedAmount = (exchangeAmount * amountExchangeRate).toFixed(2);
+
+  return `${exchangeAmount} in ${fromCurrency} is worth ${convertedAmount} in ${toCurrency}`;
+}
+
+convertCurrency("AUD", "USD", 1000).then((boobiesResult) =>
+  console.log(boobiesResult)
+);
