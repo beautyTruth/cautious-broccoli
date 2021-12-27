@@ -83,6 +83,36 @@ my code below
 
 // http://api.exchangeratesapi.io/v1/latest?access_key=f15c9143c500b323f7fbd5c9ea641411&format=1
 
+const fromCurrencyInput = document.querySelector(".from-currency");
+const toCurrencyInput = document.querySelector(".to-currency");
+const exchangeAmountInput = document.querySelector(".amount");
+const getRateBtn = document.querySelector(".get-rate");
+
+getRateBtn.addEventListener("click", function (e) {
+  e.preventDefault();
+
+  const fromCurrencyValue = fromCurrencyInput.value;
+  const toCurrencyValue = toCurrencyInput.value;
+  const exchangeAmountValue = exchangeAmountInput.value;
+
+  if (
+    fromCurrencyValue === "" ||
+    toCurrencyValue === "" ||
+    exchangeAmountValue === ""
+  ) {
+    inputError();
+  } else {
+    convertCurrency(fromCurrencyValue, toCurrencyValue, exchangeAmountValue)
+      .then((boobiesResult) => {
+        document.querySelector(".currency-item").innerText = boobiesResult;
+        setTimeout(() => {
+          location.reload();
+        }, 6000);
+      })
+      .catch(() => invalidCode());
+  }
+});
+
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 async function getExchangeRate(fromCurrency, toCurrency) {
   const response = await fetch(
@@ -96,7 +126,7 @@ async function getExchangeRate(fromCurrency, toCurrency) {
   const exchangeRate = baseCurrency * currencyRates[toCurrency];
 
   if (isNaN(exchangeRate)) {
-    console.log("Holy Shit!!!!");
+    throw new Error(invalidCode());
   }
 
   return exchangeRate;
