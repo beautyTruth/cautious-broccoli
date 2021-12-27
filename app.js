@@ -82,3 +82,23 @@ my code below
 // http://api.currencylayer.com/live?access_key=3acf4e285e342b35ab7232008c2279b5&format=1
 
 // http://api.exchangeratesapi.io/v1/latest?access_key=f15c9143c500b323f7fbd5c9ea641411&format=1
+
+async function getExchangeRate(fromCurrency, toCurrency) {
+  const response = await fetch(
+    "http://api.exchangeratesapi.io/v1/latest?access_key=f15c9143c500b323f7fbd5c9ea641411&format=1"
+  );
+
+  const currencyData = await response.json();
+  const currencyRates = currencyData.rates;
+
+  const baseCurrency = 1 / currencyRates[fromCurrency];
+  const exchangeRate = baseCurrency * currencyRates[toCurrency];
+
+  if (isNaN(exchangeRate)) {
+    console.log("Holy Shit!!!!");
+  }
+
+  return exchangeRate;
+}
+
+getExchangeRate("AFa", "USD").then((result) => console.log(result));
