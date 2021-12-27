@@ -146,3 +146,19 @@ async function convertCurrency(fromCurrency, toCurrency, exchangeAmount) {
 convertCurrency("AUD", "USD", 1000).then((boobiesResult) =>
   console.log(boobiesResult)
 );
+
+//=-=-=-=--=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+function inputError() {
+  document.querySelector(".input-error").classList.add("show");
+  setTimeout(() => {
+    document.querySelector(".input-error").classList.remove("show");
+  }, 2500);
+}
+
+function invalidCode() {
+  document.querySelector(".invalid-code").classList.add("show");
+  setTimeout(() => {
+    document.querySelector(".invalid-code").classList.remove("show");
+  }, 1500);
+}
